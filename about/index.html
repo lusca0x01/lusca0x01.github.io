@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="no-js">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sobre - lusca0x01 Blog">
+    <title>lusca0x01 Blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script>
+        document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+    </script>
+</head>
+
+<body class="home">
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="navbar-menu">
+                <nav id="site-nav" class="greedy-nav">
+                    <a class="site-title" href="/">lusca0x01 Blog</a>
+                    <ul class="visible-links">
+                        <li class="navbar-menu-item">
+                            <a href="/" data-i18n="nav.posts">Posts</a>
+                        </li>
+                        <li class="navbar-menu-item">
+                            <a href="/about/" data-i18n="nav.about">Sobre</a>
+                        </li>
+                        <li class="navbar-menu-item">
+                            <button class="lang-toggle" onclick="toggleLanguage()" title="Toggle Language">
+                                <span id="lang-btn">EN</span>
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div class="initial-content">
+        <div id="main" role="main">
+            <div class="sidebar">
+                <div class="author-box" itemscope itemtype="https://schema.org/Person">
+                    <div class="author-avatar">
+                        <img src="../images/avatar.png" alt="Author" itemprop="image">
+                    </div>
+                    <div class="author-content">
+                        <h3 class="author-name" itemprop="name" data-i18n="author.name">lusca0x01</h3>
+                        <div class="author-bio" itemprop="description" data-i18n="author.bio">Threat Researcher and
+                            Maker</div>
+                    </div>
+                    <div class="author-urls-wrapper">
+                        <ul class="author-urls social-icons">
+                            <li><i class="fas fa-fw fa-map-marker-alt"></i> <span data-i18n="author.location">Fortaleza,
+                                    Ceará, Brasil</span></li>
+                            <li><a href="https://github.com/lusca0x01" target="_blank" rel="noopener noreferrer"><i
+                                        class="fab fa-fw fa-github"></i>
+                                    <span>GitHub</span></a></li>
+                            <li><a href="mailto:lucas.wf@outlook.com" target="_blank" rel="noopener noreferrer"><i
+                                        class="fas fa-fw fa-envelope"></i>
+                                    <span>Email</span></a></li>
+                            <li><a href="https://www.linkedin.com/in/lucas-wagner-fernandes/" target="_blank"
+                                    rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin"></i>
+                                    <span>LinkedIn</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-content">
+                <article class="page-content">
+                    <header class="page-header">
+                        <h1 data-i18n="about.title">Sobre Este Blog</h1>
+                    </header>
+
+                    <div class="page-body">
+                        <section class="about-section">
+                            <h2 data-i18n="about.me.title">Sobre Mim</h2>
+                            <p data-i18n="about.me.intro">Meu nome é Lucas Wagner Fernandes, mas utilizo o nick
+                                lusca0x01. Sou muito interessado em segurança ofensiva, principalmente engenharia
+                                reversa, desenvolvimento de exploits e análise de malware. Atualmente trabalho como
+                                desenvolvedor de software no DefendaMe, uma plataforma focada em IA aplicada à análise
+                                forense e perícia digital.</p>
+                            <p data-i18n="about.me.focus">Meus interesses incluem OS internals, exploit development,
+                                análise de malware e estar atualizado com as últimas tendências e vulnerabilidades de segurança.</p>
+                        </section>
+
+                        <section class="about-section">
+                            <h2 data-i18n="about.blog.title">Sobre o Blog</h2>
+                            <p data-i18n="about.blog.intro">Este blog é um espaço pessoal onde compartilho write-ups para
+                                desafios de CTF, artigos sobre tópicos de segurança, pesquisa do meu homelab e notas rápidas
+                                sobre coisas que quero lembrar.</p>
+
+                            <h3 data-i18n="about.blog.goals">Objetivos</h3>
+                            <ul class="goals-list">
+                                <li data-i18n="about.blog.goal1">Documentar o que aprendo</li>
+                                <li data-i18n="about.blog.goal2">Compartilhar conhecimento que possa ajudar outros</li>
+                                <li data-i18n="about.blog.goal3">Construir uma referência para meu futuro</li>
+                            </ul>
+                        </section>
+                    </div>
+
+                    <div class="page-navigation">
+                        <a href="/" class="btn-back">
+                            <i class="fas fa-arrow-left"></i>
+                            <span data-i18n="about.back">← Voltar ao Início</span>
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer" class="footer">
+        <footer>
+            <div class="footer-follow">
+                <p data-i18n="footer.text">&copy; 2026 lusca0x01 Blog. Todos os direitos reservados.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="../assets/js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            updateTranslations();
+        });
+    </script>
+</body>
+
+</html>

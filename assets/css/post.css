@@ -1,0 +1,359 @@
+/* Post Page Styles */
+
+.post-main {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 2rem;
+}
+
+.post-content {
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 2rem;
+}
+
+.post-header {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+}
+
+.post-title {
+    font-size: 2rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.post-meta {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    font-size: 0.9rem;
+    color: var(--meta-color);
+    margin-bottom: 1.5rem;
+}
+
+.post-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.post-date,
+.post-readtime,
+.post-category {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.post-category {
+    background-color: var(--bg-light);
+    color: var(--link-color);
+    padding: 0.25rem 0.75rem;
+    border-radius: 3px;
+    font-size: 0.85rem;
+}
+
+.post-excerpt {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    line-height: 1.6;
+    font-style: italic;
+}
+
+.post-excerpt p {
+    margin: 0;
+}
+
+.post-body {
+    line-height: 1.8;
+}
+
+.post-body section {
+    margin-bottom: 2rem;
+}
+
+.post-body h2 {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.post-body h3 {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.post-body p {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+}
+
+.post-body code {
+    background-color: var(--bg-light);
+    color: var(--primary-color);
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+.post-body pre {
+    background-color: var(--bg-light);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 1rem;
+    overflow-x: auto;
+    margin-bottom: 1rem;
+}
+
+.post-body pre code {
+    background: none;
+    color: #90ee90;
+    padding: 0;
+    border-radius: 0;
+}
+
+.post-body ul,
+.post-body ol {
+    list-style: disc;
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+}
+
+.post-body li {
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+}
+
+.alert {
+    padding: 1rem;
+    border-left: 4px solid;
+    border-radius: 4px;
+    margin: 1.5rem 0;
+    background-color: var(--bg-light);
+}
+
+.alert-warning {
+    border-color: #ff9800;
+}
+
+.alert-warning i {
+    color: #ff9800;
+    margin-right: 0.5rem;
+}
+
+.alert-info {
+    border-color: var(--primary-color);
+}
+
+.alert-info i {
+    color: var(--primary-color);
+    margin-right: 0.5rem;
+}
+
+.alert strong {
+    color: var(--text-color);
+}
+
+.key-takeaways {
+    background-color: var(--bg-light);
+    border-left: 4px solid var(--primary-color);
+    padding: 1.5rem;
+    border-radius: 4px;
+    margin: 2rem 0;
+}
+
+.key-takeaways h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+}
+
+.key-takeaways ul {
+    margin: 1rem 0 0 2rem;
+}
+
+.key-takeaways li {
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+}
+
+.toc-box {
+    background-color: var(--bg-light);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 1.5rem;
+}
+
+.toc-box h4 {
+    color: var(--primary-color);
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.toc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.toc-list li {
+    margin-bottom: 0.5rem;
+}
+
+.toc-list a {
+    color: var(--link-color);
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+}
+
+.toc-list a:hover {
+    color: var(--accent-color);
+}
+
+.post-footer {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid var(--border-color);
+}
+
+.post-tags {
+    margin-bottom: 2rem;
+}
+
+.tag {
+    display: inline-block;
+    background-color: var(--bg-light);
+    color: var(--link-color);
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.tag:hover {
+    background-color: var(--link-color);
+    color: white;
+}
+
+.tag i {
+    margin-right: 0.3rem;
+}
+
+.post-nav {
+    margin-top: 2rem;
+}
+
+.btn-back {
+    display: inline-block;
+    color: var(--link-color);
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--bg-light);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.btn-back:hover {
+    background-color: var(--link-color);
+    color: white;
+}
+
+.btn-back i {
+    margin-right: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .post-main {
+        grid-template-columns: 1fr;
+    }
+
+    .post-content {
+        padding: 1.5rem;
+    }
+
+    .post-title {
+        font-size: 1.5rem;
+    }
+
+    .post-body h2 {
+        font-size: 1.25rem;
+    }
+
+    .post-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .post-content {
+        padding: 1rem;
+    }
+
+    .post-title {
+        font-size: 1.25rem;
+    }
+
+    .post-body h2 {
+        font-size: 1.1rem;
+    }
+
+    .post-body h3 {
+        font-size: 1rem;
+    }
+
+    .post-body pre {
+        padding: 0.75rem;
+        font-size: 0.85rem;
+    }
+
+    .post-meta {
+        flex-direction: column;
+        gap: 0.25rem;
+        font-size: 0.8rem;
+    }
+
+    .toc-box {
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+.article-highlight {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    margin: 2rem 0 1rem;
+    padding: 1rem 1.25rem;
+
+    background: rgba(0, 212, 255, 0.08);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    border-left: 4px solid var(--link-color);
+    border-radius: 6px;
+}
+
+.article-highlight i {
+    font-size: 1.1rem;
+    color: var(--link-color);
+}
+
+.article-highlight h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--link-color);
+    letter-spacing: 0.3px;
+}
