@@ -142,18 +142,18 @@ function renderPosts() {
         const minuteText = translations[currentLanguage]['minute.read'];
 
         const postHTML = `
-            <div class="list__item">
+            <div class="list-item">
                 <article class="posts-item">
                     <h2 class="posts-item-title no_toc">
                         <a href="${post.url}">${post.title}</a>
                     </h2>
-                    <p class="page__meta">
-                        <span class="page__meta-date">
+                    <p class="page-meta">
+                        <span class="page-meta-date">
                             <i class="far fa-calendar-alt"></i>
                             ${post.date}
                         </span>
-                        <span class="page__meta-sep">|</span>
-                        <span class="page__meta-readtime">
+                        <span class="page-meta-sep">|</span>
+                        <span class="page-meta-readtime">
                             <i class="far fa-clock"></i>
                             ${post.readtime} ${minuteText}
                         </span>

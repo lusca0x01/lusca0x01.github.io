@@ -173,10 +173,21 @@
     font-size: 0.85rem;
 }
 
+@media (max-width: 600px) {
+    .post-body pre {
+        padding: 0.875rem;
+        font-size: 0.85rem;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
 @media (max-width: 480px) {
     .post-body pre {
         padding: 0.75rem;
         font-size: 0.8rem;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
 }
 
@@ -363,6 +374,57 @@
     }
 }
 
+@media (max-width: 600px) {
+    .post-content {
+        padding: 1.25rem;
+    }
+
+    .post-title {
+        font-size: 1.35rem;
+        margin-bottom: 0.875rem;
+        word-break: break-word;
+    }
+
+    .post-body h2 {
+        font-size: 1.15rem;
+        word-break: break-word;
+    }
+
+    .post-body h3 {
+        font-size: 1.05rem;
+        word-break: break-word;
+    }
+
+    .post-body ul,
+    .post-body ol {
+        margin-left: 1.5rem;
+    }
+
+    .post-body li {
+        margin-bottom: 0.4rem;
+    }
+
+    .post-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+        font-size: 0.85rem;
+    }
+
+    .key-takeaways {
+        padding: 1.25rem;
+        margin: 1.5rem 0;
+    }
+
+    .key-takeaways ul {
+        margin-left: 1.5rem;
+    }
+
+    .toc-box {
+        padding: 1.25rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
 @media (max-width: 480px) {
     .post-content {
         padding: 1rem;
@@ -378,11 +440,21 @@
 
     .post-body h3 {
         font-size: 1rem;
+        word-break: break-word;
     }
 
     .post-body pre {
         padding: 0.75rem;
-        font-size: 0.85rem;
+        font-size: 0.8rem;
+    }
+
+    .post-body ul,
+    .post-body ol {
+        margin-left: 1.25rem;
+    }
+
+    .post-body li {
+        margin-bottom: 0.35rem;
     }
 
     .post-meta {

@@ -107,7 +107,7 @@ ul {
 .navbar-menu,
 .greedy-nav,
 .visible-links,
-.page__meta,
+.page-meta,
 .pagination,
 .pagination ul,
 .page-navigation {
@@ -243,30 +243,32 @@ ul {
     margin-top: 2rem;
 }
 
-.list__item {
+.list-item {
     margin-bottom: 2rem;
     padding-bottom: 2rem;
     border-bottom: 1px solid var(--border-color);
 }
 
-.list__item:last-child {
+.list-item:last-child {
     border-bottom: none;
 }
 
 .posts-item-title {
     margin-bottom: .5rem;
     font-size: 1.3rem;
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
-.page__meta {
+.page-meta {
     gap: 1rem;
     margin-bottom: .5rem;
     font-size: .9rem;
     color: var(--meta-color);
 }
 
-.page__meta-date,
-.page__meta-readtime {
+.page-meta-date,
+.page-meta-readtime {
     display: flex;
     align-items: center;
     gap: .3rem;
@@ -452,23 +454,65 @@ ul {
     }
 
     .greedy-nav {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
     }
 
     .visible-links {
-        flex-direction: column;
-        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: auto;
+        gap: 0.5rem;
     }
 
     .navbar-menu-item {
-        width: 100%;
+        width: auto;
     }
 
     .navbar-menu-item a {
-        display: block;
-        padding: 0.5rem 0;
+        display: inline-block;
+        padding: 0.35rem 0.6rem;
+        border-radius: 3px;
+        background: var(--bg-light);
+        transition: all var(--transition);
+        font-size: 0.9rem;
+    }
+
+    .navbar-menu-item a:hover {
+        background: var(--link-color);
+    }
+}
+
+@media (max-width: 600px) {
+    :root {
+        font-size: 15px;
+    }
+
+    .navbar-inner,
+    .initial-content {
+        padding-inline: 15px;
+    }
+
+    .posts,
+    .page-content,
+    .author-box {
+        padding: 1.25rem;
+    }
+
+    .site-title {
+        font-size: 1.1rem;
+    }
+
+    .visible-links {
+        gap: 0.75rem;
+        font-size: 0.9rem;
+    }
+
+    .lang-toggle {
+        padding: 0.35rem 0.7rem;
+        font-size: 0.8rem;
     }
 }
 
@@ -489,7 +533,7 @@ ul {
     }
 
     .site-title {
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
 
     .visible-links {
@@ -499,10 +543,10 @@ ul {
 
     .lang-toggle {
         padding: 0.3rem 0.6rem;
-        font-size: 0.7rem;
+        font-size: 0.75rem;
     }
 
-    .page__meta {
+    .page-meta {
         flex-direction: column;
         align-items: flex-start;
         gap: 0.2rem;
@@ -555,7 +599,7 @@ ul {
         font-size: 0.95rem;
     }
 
-    .list__item {
+    .list-item {
         margin-bottom: 1.5rem;
         padding-bottom: 1.5rem;
     }
@@ -578,6 +622,19 @@ ul {
 
     .pagination {
         padding-top: 1rem;
+        gap: 0.35rem;
+    }
+
+    .pagination a,
+    .pagination .disabled,
+    .pagination .current {
+        min-width: 35px;
+        padding: 0.4rem 0.5rem;
+        font-size: 0.85rem;
+    }
+
+    .list-item {
+        word-break: break-word;
     }
 }
 
