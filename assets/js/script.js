@@ -20,6 +20,8 @@ const translations = {
         'about.blog.goal2': 'Compartilhar conhecimento que possa ajudar outros',
         'about.blog.goal3': 'Construir uma referência para meu futuro',
         'about.back': 'Voltar ao Início',
+        'page.notfound': 'Página Não Encontrada',
+        'page.notfound.desc': 'Desculpe, a página que você está procurando não existe ou foi movida.',
     },
     'en': {
         'nav.posts': 'Posts',
@@ -41,6 +43,8 @@ const translations = {
         'about.blog.goal2': 'Share knowledge that might help others',
         'about.blog.goal3': 'Build a reference for future self',
         'about.back': 'Back to Home',
+        'page.notfound': 'Page Not Found',
+        'page.notfound.desc': 'Sorry, the page you are looking for does not exist or has been moved.',
     }
 };
 
