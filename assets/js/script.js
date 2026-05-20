@@ -76,7 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setLanguage(currentLanguage);
     renderPosts();
     updateHTMLLang();
-    updateTitle();
 });
 
 function setLanguage(lang) {
@@ -87,7 +86,6 @@ function setLanguage(lang) {
     renderPosts();
     updateHTMLLang();
     updateLangButton();
-    updateTitle();
 }
 
 function toggleLanguage() {
@@ -97,10 +95,6 @@ function toggleLanguage() {
 
 function updateHTMLLang() {
     document.documentElement.lang = currentLanguage;
-}
-
-function updateTitle() {
-    document.title = translations[currentLanguage]['title'];
 }
 
 function updateLangButton() {
