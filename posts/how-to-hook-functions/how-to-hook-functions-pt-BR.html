@@ -7,8 +7,8 @@
     <meta name="description" content="Como 'Hookar' Funções: Guia Completo de Function Hooking">
     <title>Como "Hookar" Funções: Guia Completo de Function Hooking</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/post.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/post.css">
     <script>
         document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
     </script>
@@ -43,7 +43,7 @@
             <div class="sidebar">
                 <div class="author-box" itemscope itemtype="https://schema.org/Person">
                     <div class="author-avatar">
-                        <img src="../images/avatar.png" alt="Author" itemprop="image">
+                        <img src="../../images/avatar.png" alt="Author" itemprop="image">
                     </div>
                     <div class="author-content">
                         <h3 class="author-name" itemprop="name" data-i18n="author.name">lusca0x01</h3>
@@ -67,22 +67,21 @@
                     </div>
                 </div>
                 <div class="toc-box">
-                    <h4 data-i18n="post.index">Índice</h4>
+                    <h4>Índice</h4>
                     <ul class="toc-list">
-                        <li><a href="#o-que-e-hooking" data-i18n="hooking.section1">O que é Function Hooking?</a></li>
-                        <li><a href="#tipos-hooking" data-i18n="hooking.section2">Tipos de Function Hooking</a></li>
-                        <li><a href="#detour-hooking" data-i18n="hooking.section3">Detour Hooking</a></li>
-                        <li><a href="#encontrando-funcoes" data-i18n="hooking.section4">Encontrando Funções</a></li>
-                        <li><a href="#pattern-scanning" data-i18n="hooking.section5">Pattern Scanning</a></li>
-                        <li><a href="#conclusao" data-i18n="post.conclusion">Conclusão</a></li>
+                        <li><a href="#o-que-e-hooking">O que é Function Hooking?</a></li>
+                        <li><a href="#tipos-hooking">Tipos de Function Hooking</a></li>
+                        <li><a href="#detour-hooking">Detour Hooking</a></li>
+                        <li><a href="#encontrando-funcoes">Encontrando Funções</a></li>
+                        <li><a href="#pattern-scanning">Pattern Scanning</a></li>
+                        <li><a href="#conclusao">Conclusão</a></li>
                     </ul>
                 </div>
             </div>
 
             <article class="post-content">
                 <header class="post-header">
-                    <h1 class="post-title" data-i18n="hooking.title">Como "Hookar" Funções: Guia Completo de Function
-                        Hooking</h1>
+                    <h1 class="post-title">Como "Hookar" Funções: Guia Completo de Function Hooking</h1>
 
                     <div class="post-meta">
                         <span class="post-date">
@@ -110,7 +109,7 @@
 
                 <div class="post-body">
                     <section id="o-que-e-hooking">
-                        <h2 data-i18n="hooking.section1">O que é Function Hooking?</h2>
+                        <h2>O que é Function Hooking?</h2>
                         <p>Function Hooking é uma técnica utilizada para interceptar, monitorar ou redirecionar chamadas
                             de funções em tempo de execução, permitindo alterar o comportamento original de uma
                             aplicação sem modificar diretamente seu código-fonte ou recompilá-la.</p>
@@ -142,7 +141,7 @@
                     </section>
 
                     <section id="tipos-hooking">
-                        <h2 data-i18n="hooking.section2">Quais os tipos de Function Hooking? </h2>
+                        <h2>Quais os tipos de Function Hooking? </h2>
                         <p>Existem diversas técnicas diferentes de hooking. Dentre elas, podemos citar:</p>
 
                         <h3>Import Address Table Hooking (IAT Hooking)</h3>
@@ -172,7 +171,7 @@
                     </section>
 
                     <section id="detour-hooking">
-                        <h2 data-i18n="hooking.section3">Detour Hooking (Inline Hooking)</h2>
+                        <h2>Detour Hooking (Inline Hooking)</h2>
                         <p>Imagine a função <code>MessageBoxA</code> da API do Windows. Quando uma aplicação chama essa
                             função, o fluxo de execução normalmente segue diretamente para a implementação original
                             presente na <code>user32.dll</code>.</p>
@@ -238,7 +237,7 @@ E9 12 34 56 78    ; jmp HookedMessageBoxA
 </code></pre>
 
                         <p>Ou seja, a função original ficou parcialmente corrompida. Além disso, não podemos
-                            sobrescrever “metade” de uma instrução. Como instruções x86/x64 possuem tamanho variável, é
+                            sobrescrever "metade" de uma instrução. Como instruções x86/x64 possuem tamanho variável, é
                             necessário sobrescrever instruções completas até atingir o tamanho mínimo necessário para o
                             hook.</p>
 
@@ -328,7 +327,7 @@ jmp rax</code></pre>
                         </section>
 
                         <section id="encontrando-funcoes">
-                            <h2 data-i18n="hooking.section4">
+                            <h2>
                                 Mas e se não soubermos quem é a Função?
                             </h2>
 
@@ -339,7 +338,7 @@ jmp rax</code></pre>
 
                             <p>
                                 Em muitos casos, temos apenas um binário compilado e completamente
-                                “cego” (<em>stripped</em>), sem símbolos, nomes ou documentação.
+                                "cego" (<em>stripped</em>), sem símbolos, nomes ou documentação.
                             </p>
 
                             <p>
@@ -372,7 +371,7 @@ Next Scan → 75</code></pre>
                                 Até encontrarmos o endereço responsável pela variável.
                             </p>
 
-                            <h3>“Who writes to this address?”</h3>
+                            <h3>"Who writes to this address?"</h3>
 
                             <p>
                                 Depois disso, podemos utilizar uma funcionalidade extremamente importante:
@@ -432,7 +431,7 @@ mov [rbx+10], eax</code></pre>
                         </section>
 
                         <section id="pattern-scanning">
-                            <h2 data-i18n="hooking.section5">
+                            <h2>
                                 Pattern Scanning
                             </h2>
 
@@ -576,7 +575,7 @@ mov rax, 7FF712341000h</code></pre>
                         </section>
 
                         <section id="conclusao">
-                            <h2 data-i18n="post.conclusion">Conclusão</h2>
+                            <h2>Conclusão</h2>
 
                             <p>
                                 Function Hooking é uma técnica extremamente poderosa e versátil,
@@ -591,7 +590,7 @@ mov rax, 7FF712341000h</code></pre>
                             </p>
 
                             <div class="key-takeaways">
-                                <h3 data-i18n="post.keypoints">Pontos-chave:</h3>
+                                <h3>Pontos-chave:</h3>
 
                                 <ul>
                                     <li>
@@ -651,8 +650,8 @@ mov rax, 7FF712341000h</code></pre>
         </footer>
     </div>
 
-    <script src="../assets/js/script.js"></script>
-    <script src="../assets/js/post.js"></script>
+    <script src="../../assets/js/script.js"></script>
+    <script src="../../assets/js/post.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             updateTranslations();

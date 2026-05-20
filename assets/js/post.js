@@ -1,7 +1,19 @@
 function toggleLanguage() {
-    const newLang = localStorage.getItem('language') === 'pt-BR' ? 'en' : 'pt-BR';
+    const currentLang = localStorage.getItem('language') === 'pt-BR' ? 'pt-BR' : 'en';
+    const newLang = currentLang === 'pt-BR' ? 'en' : 'pt-BR';
+    
     localStorage.setItem('language', newLang);
     updateLangButton(newLang);
+    
+    const currentUrl = window.location.pathname;
+    
+    if (currentUrl.includes('-pt-BR.html')) {
+        const newUrl = currentUrl.replace('-pt-BR.html', '-en.html');
+        window.location.href = newUrl;
+    } else if (currentUrl.includes('-en.html')) {
+        const newUrl = currentUrl.replace('-en.html', '-pt-BR.html');
+        window.location.href = newUrl;
+    }
 }
 
 function updateLangButton(lang) {

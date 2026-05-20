@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="How to Hook Functions: Complete Function Hooking Guide">
+    <title>How to Hook Functions: Complete Function Hooking Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/post.css">
+    <script>
+        document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+    </script>
+</head>
+
+<body class="home">
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="navbar-menu">
+                <nav id="site-nav" class="greedy-nav">
+                    <a class="site-title" href="/">lusca0x01 Blog</a>
+                    <ul class="visible-links">
+                        <li class="navbar-menu-item">
+                            <a href="/" data-i18n="nav.posts">Posts</a>
+                        </li>
+                        <li class="navbar-menu-item">
+                            <a href="/about/" data-i18n="nav.about">About</a>
+                        </li>
+                        <li class="navbar-menu-item">
+                            <button class="lang-toggle" onclick="toggleLanguage()" title="Toggle Language">
+                                <span id="lang-btn">PT-BR</span>
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div class="initial-content">
+        <div id="main" class="post-main">
+            <div class="sidebar">
+                <div class="author-box" itemscope itemtype="https://schema.org/Person">
+                    <div class="author-avatar">
+                        <img src="../../images/avatar.png" alt="Author" itemprop="image">
+                    </div>
+                    <div class="author-content">
+                        <h3 class="author-name" itemprop="name" data-i18n="author.name">lusca0x01</h3>
+                        <div class="author-bio" itemprop="description" data-i18n="author.bio">Threat Researcher and
+                            Maker</div>
+                    </div>
+                    <div class="author-urls-wrapper">
+                        <ul class="author-urls social-icons">
+                            <li><i class="fas fa-fw fa-map-marker-alt"></i> <span data-i18n="author.location">Fortaleza,
+                                    Ceará, Brazil</span></li>
+                            <li><a href="https://github.com/lusca0x01" target="_blank" rel="noopener noreferrer"><i
+                                        class="fab fa-fw fa-github"></i>
+                                    <span>GitHub</span></a></li>
+                            <li><a href="mailto:lucas.wf@outlook.com" target="_blank" rel="noopener noreferrer"><i
+                                        class="fas fa-fw fa-envelope"></i>
+                                    <span>Email</span></a></li>
+                            <li><a href="https://www.linkedin.com/in/lucas-wagner-fernandes/" target="_blank"
+                                    rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin"></i>
+                                    <span>LinkedIn</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="toc-box">
+                    <h4>Table of Contents</h4>
+                    <ul class="toc-list">
+                        <li><a href="#what-is-hooking">What is Function Hooking?</a></li>
+                        <li><a href="#types-hooking">Types of Function Hooking</a></li>
+                        <li><a href="#detour-hooking">Detour Hooking</a></li>
+                        <li><a href="#finding-functions">Finding Functions</a></li>
+                        <li><a href="#pattern-scanning">Pattern Scanning</a></li>
+                        <li><a href="#conclusion">Conclusion</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <article class="post-content">
+                <header class="post-header">
+                    <h1 class="post-title">How to Hook Functions: Complete Function Hooking Guide</h1>
+
+                    <div class="post-meta">
+                        <span class="post-date">
+                            <i class="far fa-calendar-alt"></i>
+                            May 20, 2026
+                        </span>
+                        <span class="post-readtime">
+                            <i class="far fa-clock"></i>
+                            12 minutes read
+                        </span>
+                        <span class="post-category">
+                            <i class="fas fa-tag"></i>
+                            Reverse Engineering
+                        </span>
+                    </div>
+
+                    <div class="post-excerpt">
+                        <p>This guide explores how to intercept and redirect functions at runtime using Function Hooking techniques, with special focus on Detour Hooking (Inline Hooking). Additionally, we'll cover fundamental concepts such as Pattern Scanning, Trampolines, Relay Functions, and strategies used to locate and manipulate functions even in binaries without symbols.</p>
+                    </div>
+                </header>
+
+                <div class="post-body">
+                    <section id="what-is-hooking">
+                        <h2>What is Function Hooking?</h2>
+                        <p>Function Hooking is a technique used to intercept, monitor, or redirect function calls at runtime, allowing you to alter the original behavior of an application without directly modifying its source code or recompiling it.</p>
+                        <p>The code responsible for intercepting and manipulating these calls is called a <strong>hook</strong>.</p>
+
+                        <p>In practice, the goal of hooking is to make execution pass through custom code before reaching the original function, which can:</p>
+                        <ul>
+                            <li>Alter parameters</li>
+                            <li>Modify return values</li>
+                            <li>Record information (logging)</li>
+                            <li>Block executions</li>
+                            <li>Completely redirect program flow</li>
+                        </ul>
+
+                        <p>This technique is widely used in:</p>
+                        <ul>
+                            <li>Debuggers (such as WinDbg, x64dbg)</li>
+                            <li>EDRs and antivirus software</li>
+                            <li>Reverse engineering</li>
+                            <li>Software instrumentation</li>
+                            <li>Game overlays and mods</li>
+                            <li>API monitoring</li>
+                            <li>Profiling systems</li>
+                            <li>Compatibility mechanisms</li>
+                        </ul>
+                    </section>
+
+                    <section id="types-hooking">
+                        <h2>What are the types of Function Hooking?</h2>
+                        <p>There are several different hooking techniques. Among them, we can mention:</p>
+
+                        <h3>Import Address Table Hooking (IAT Hooking)</h3>
+                        <p>Replaces the original function pointer in the Import Address Table (IAT) with another. It's a less invasive approach commonly used for application-level hooks.</p>
+
+                        <h3>Export Address Table Hooking (EAT Hooking)</h3>
+                        <p>Follows the same principle, but uses the DLL's export table (EAT) instead of the import table. Useful for hooking functions exported by a DLL.</p>
+
+                        <h3>VTable Hooking</h3>
+                        <p>Uses the concept of Virtual Tables (VTables) from C++ to alter pointers to virtual methods. Particularly useful in object-oriented applications.</p>
+
+                        <div class="article-highlight">
+                            <i class="fas fa-code-branch"></i>
+                            <h3>Article Focus</h3>
+                        </div>
+                        <p>
+                            However, in this article we will focus on
+                            <strong>Detour Hooking</strong>
+                            (also known as <strong>Inline Hooking</strong>),
+                            a technique that directly alters the execution flow of the original function,
+                            usually by overwriting its first instructions with a jump
+                            (<code>JMP</code>) to a custom function.
+                        </p>
+                    </section>
+
+                    <section id="detour-hooking">
+                        <h2>Detour Hooking (Inline Hooking)</h2>
+                        <p>Imagine the <code>MessageBoxA</code> function from the Windows API. When an application calls this function, execution normally flows directly to the original implementation in <code>user32.dll</code>.</p>
+
+                        <p>The bytes belonging to the DLL normally reside in pages marked as read and execute (RX), preventing modifications. However, operating system APIs like <code>VirtualProtect</code> allow temporarily changing permissions to write (RWX or RW).</p>
+
+                        <h3>How it works:</h3>
+                        <p>In a Detour Hook, we modify the first bytes (usually the first 5 bytes, which allow us to perform a 32-bit relative jump) of that function in memory so that instead of continuing normally, execution is diverted to a function we control.</p>
+
+                        <p>Imagine that the original beginning of the function is (common in <strong>stack frame</strong> creation):</p>
+                        <pre><code class="language-nasm">MessageBoxA:
+push rbp
+mov rbp, rsp
+sub rsp, 30h</code></pre>
+
+                        <p>In bytes, this would be something like:</p>
+                        <pre><code class="language-hex">55                ; push rbp
+48 89 E5          ; mov rbp, rsp
+48 83 EC 30       ; sub rsp, 30h</code></pre>
+
+                        <p>We replace the first bytes with a relative <code>JMP</code>:</p>
+                        <pre><code class="language-nasm">jmp HookedMessageBoxA; located at 0x12345678</code></pre>
+
+                        <p>The opcode is <code>E9 &lt;offset&gt;</code>, where the offset is calculated as:</p>
+                        <pre><code class="language-text">Destination - (Current Instruction Pointer + 5)</code></pre>
+
+                        <p>The 5 bytes represent:</p>
+                        <pre><code class="language-text">1 byte of opcode E9
+4 bytes of offset</code></pre>
+
+                        <p>In practice, the beginning of the function becomes:</p>
+                        <pre><code class="language-nasm">E9 12 34 56 78    ; jmp HookedMessageBoxA
+83 EC 30          ; Bytes that were not overwritten</code></pre>
+
+                        <h3>The Problem: Corrupted Instructions</h3>
+                        <p>When we overwrite the first bytes of the original function with the <code>JMP</code>, we destroy legitimate instructions. This means that if we try to execute the original implementation later, part of the necessary code has already been lost.</p>
+
+                        <p>Exemplifying:</p>
+                        <pre><code class="language-nasm">; Originally:
+55                ; push rbp
+48 89 E5          ; mov rbp, rsp
+48 83 EC 30       ; sub rsp, 30h
+
+; After the hook:
+E9 12 34 56 78    ; jmp HookedMessageBoxA
+83 EC 30          ; Bytes that were not overwritten
+
+; Original bytes lost:
+55
+48 89 E5
+48
+</code></pre>
+
+                        <p>That is, the original function was partially corrupted. Furthermore, we can't overwrite "half" of an instruction. Since x86/x64 instructions have variable sizes, we need to overwrite complete instructions until we reach the minimum size needed for the hook.</p>
+
+                        <section id="trampoline-relay">
+                            <h2>The Solution: Trampoline + Relay Function</h2>
+
+                            <h3>Trampoline</h3>
+
+                            <p>
+                                The <strong>Trampoline</strong> is responsible for preserving and executing the original bytes overwritten by the hook.
+                            </p>
+
+                            <p>It works as follows:</p>
+
+                            <ul>
+                                <li>copies the original instructions removed from the function;</li>
+                                <li>executes those instructions in another memory region;</li>
+                                <li>
+                                    jumps back to the continuation of the original function.
+                                </li>
+                            </ul>
+
+                            <p>Conceptual example:</p>
+
+                            <pre><code class="language-nasm">; Bytes copied from the original function
+push rbp
+mov rbp, rsp
+
+; Returns to MessageBoxA+5
+jmp MessageBoxA+5</code></pre>
+
+                            <p>
+                                This way, we can continue legitimate function execution even after modifying its first bytes.
+                            </p>
+
+                            <h3>Relay Function</h3>
+
+                            <p>
+                                The <strong>Relay Function</strong> acts as an intermediary function between the hook and the original function.
+                            </p>
+
+                            <p>It typically has two objectives:</p>
+
+                            <ul>
+                                <li>encapsulate auxiliary logic;</li>
+                                <li>facilitate flow redirection.</li>
+                            </ul>
+
+                            <p>
+                                In x64 architectures this is especially important because
+                                <code>jmp rel32</code> has limited range of ±2GB.
+                            </p>
+
+                            <p>
+                                If our hook function is very far from the original function in
+                                memory, we can't reach it directly using only the
+                                <code>E9</code> opcode.
+                            </p>
+
+                            <p>
+                                In this scenario, we create a small intermediary function near the
+                                original function:
+                            </p>
+
+                            <pre><code class="language-nasm">RelayFunction:
+mov rax, HookedMessageBoxA
+jmp rax</code></pre>
+
+                            <p>
+                                The Relay Function then performs the absolute jump to the real hook.
+                            </p>
+
+                            <p>So the flow becomes:</p>
+
+                            <pre><code class="language-text">MessageBoxA (hooked function)
+    → Relay Function
+        → Hook (HookedMessageBoxA)
+            → Trampoline
+                → MessageBoxA (continuation)</code></pre>
+
+                            <h3>Code Example:</h3>
+                            <pre><code class="language-c">// TODO: Code example of Detour Hooking with Trampoline and Relay Function
+                        </code></pre>
+                        </section>
+
+                        <section id="finding-functions">
+                            <h2>
+                                But what if we don't know who the Function is?
+                            </h2>
+
+                            <p>
+                                It's very common that when analyzing an application, there's no PDB or any kind of reference to function names and signatures.
+                            </p>
+
+                            <p>
+                                In many cases, we only have a compiled binary that is completely "blind" (<em>stripped</em>), without symbols, names, or documentation.
+                            </p>
+
+                            <p>
+                                Still, tools like x64dbg, IDA, Ghidra, or Cheat Engine allow you to analyze program behavior at runtime.
+                            </p>
+
+                            <p>
+                                A classic example, focused on the gaming world, is finding a health variable that increases or decreases after a certain action within the game.
+                            </p>
+
+                            <h3>Finding the Function by Behavior</h3>
+
+                            <p>Imagine the player's health is:</p>
+
+                            <pre><code class="language-text">100</code></pre>
+
+                            <p>After taking damage:</p>
+
+                            <pre><code class="language-text">75</code></pre>
+
+                            <p>In Cheat Engine, we can search for:</p>
+
+                            <pre><code class="language-text">First Scan → 100
+Next Scan → 75</code></pre>
+
+                            <p>
+                                Until we find the address responsible for the variable.
+                            </p>
+
+                            <h3>"Who writes to this address?"</h3>
+
+                            <p>
+                                After that, we can use an extremely important feature:
+                            </p>
+
+                            <pre><code class="language-text">Find out what writes to this address
+or
+What accesses this address</code></pre>
+
+                            <p>
+                                Then, when taking damage again, the debugger intercepts the responsible instruction:
+                            </p>
+
+                            <pre><code class="language-nasm">sub [rcx+14], eax
+or
+mov [rbx+10], eax</code></pre>
+
+                            <p>
+                                At this point, even without knowing the function name, we discover:
+                            </p>
+
+                            <ul>
+                                <li>which instruction alters the health;</li>
+                                <li>which register contains the player structure;</li>
+                                <li>where the responsible code is in memory.</li>
+                            </ul>
+
+                            <h3>Going Up to the Function</h3>
+
+                            <p>
+                                Now we can open the disassembler and analyze the code around that instruction:
+                            </p>
+
+                            <pre><code class="language-nasm">Game.exe+123456:
+48 89 5C 24 08
+57
+48 83 EC 20
+29 41 14          ; sub [rcx+14], eax</code></pre>
+
+                            <p>
+                                Even without symbols, we can identify:
+                            </p>
+
+                            <ul>
+                                <li>function prologue;</li>
+                                <li>execution flow;</li>
+                                <li>calls;</li>
+                                <li>conditionals;</li>
+                                <li>registers used.</li>
+                            </ul>
+
+                            <p>
+                                That is: we found the function through its behavior.
+                            </p>
+                        </section>
+
+                        <section id="pattern-scanning">
+                            <h2>
+                                Pattern Scanning
+                            </h2>
+
+                            <p>
+                                Pattern Scanning (also known as Signature Scan or AOB Scan) is a technique used to locate specific regions of code in memory through byte sequences characteristic of a function or instruction snippet.
+                            </p>
+
+                            <p>This approach is extremely useful when:</p>
+
+                            <ul>
+                                <li>we don't have symbols (PDB);</li>
+                                <li>addresses change between executions;</li>
+                                <li>ASLR is enabled;</li>
+                                <li>the application receives constant updates;</li>
+                                <li>we don't know the function name;</li>
+                                <li>we don't have access to source code.</li>
+                            </ul>
+
+                            <p>
+                                Instead of searching for fixed names or addresses, we search for patterns of instructions that identify that code snippet.
+                            </p>
+
+                            <h3>How it works?</h3>
+
+                            <p>
+                                Imagine we identify the following sequence during analysis:
+                            </p>
+
+                            <pre><code class="language-hex">48 89 5C 24 08
+57
+48 83 EC 20
+29 41 14</code></pre>
+
+                            <p>We can transform it into a signature:</p>
+
+                            <pre><code class="language-hex">48 89 5C 24 08 57 48 83 EC 20 29 41 14</code></pre>
+
+                            <p>
+                                The scanner then traverses the module memory byte by byte trying to find exactly that sequence.
+                            </p>
+
+                            <h3>Wildcards</h3>
+
+                            <p>
+                                Not all bytes are stable between executions or versions.
+                            </p>
+
+                            <p>Instructions like:</p>
+
+                            <pre><code class="language-nasm">call Game.exe+123456
+jmp Game.exe+ABCDEF
+mov rax, 7FF712341000h</code></pre>
+
+                            <p>may contain:</p>
+
+                            <ul>
+                                <li>relative offsets;</li>
+                                <li>relocated addresses;</li>
+                                <li>variable pointers;</li>
+                                <li>values changed by the compiler.</li>
+                            </ul>
+
+                            <p>
+                                That's why we use wildcards (<code>?</code>) to ignore variable bytes.
+                            </p>
+
+                            <p>Example:</p>
+
+                            <pre><code class="language-hex">48 89 5C 24 08 57 48 83 EC ? ? 29 41 14</code></pre>
+
+                            <p>
+                                In this case, the two bytes after <code>EC</code> can take any value.
+                            </p>
+
+                            <h3>In practice</h3>
+
+                            <p>Suppose memory contains:</p>
+
+                            <pre><code class="language-text">7FF600001000  48 89 5C 24 08
+7FF600001005  57
+7FF600001006  48 83 EC 20
+7FF60000100A  29 41 14</code></pre>
+
+                            <p>The Pattern Scanner finds:</p>
+
+                            <pre><code class="language-hex">48 89 5C 24 08 57 48 83 EC 20 29 41 14</code></pre>
+
+                            <p>and returns:</p>
+
+                            <pre><code class="language-text">7FF600001000</code></pre>
+
+                            <h3>Creating Good Signatures</h3>
+
+                            <p>A bad signature like:</p>
+
+                            <pre><code class="language-hex">55 8B EC</code></pre>
+
+                            <p>
+                                can appear hundreds or thousands of times within the executable.
+                            </p>
+
+                            <p>Better signatures:</p>
+
+                            <ul>
+                                <li>are larger;</li>
+                                <li>have more unique bytes;</li>
+                                <li>avoid highly variable regions;</li>
+                                <li>survive binary updates.</li>
+                            </ul>
+
+                            <p>More robust example:</p>
+
+                            <pre><code class="language-hex">48 89 5C 24 08 57 48 83 EC ? ? 48 8B F9</code></pre>
+
+                            <h3>Relating Pattern Scanning to Function Hooking</h3>
+
+                            <p>
+                                In practice, Pattern Scanning is often used before hook installation.
+                            </p>
+
+                            <p>Common flow:</p>
+
+                            <pre><code class="language-text">Pattern Scan
+    → Find address at runtime
+        → Install Hook</code></pre>
+
+                            <p>
+                                This allows the hook to continue working even after address changes caused by ASLR or application updates.
+                            </p>
+
+                            <h3>Code Example:</h3>
+                            <pre><code class="language-c">// TODO: Code example of Pattern Scanning to find the function to be hooked
+                            </code></pre>
+                        </section>
+
+                        <section id="conclusion">
+                            <h2>Conclusion</h2>
+
+                            <p>
+                                Function Hooking is an extremely powerful and versatile technique, widely used in reverse engineering, instrumentation, debugging, malware analysis, and tool development.
+                            </p>
+
+                            <p>
+                                Mastering concepts like Detour Hooking, Trampolines, Relay Functions, and Pattern Scanning allows you to intercept and analyze applications even without symbols or access to source code.
+                            </p>
+
+                            <div class="key-takeaways">
+                                <h3>Key points:</h3>
+
+                                <ul>
+                                    <li>
+                                        Function Hooking intercepts and redirects function calls at runtime;
+                                    </li>
+
+                                    <li>
+                                        Trampolines preserve the original bytes overwritten by the hook;
+                                    </li>
+
+                                    <li>
+                                        Relay Functions help overcome range limitations in x64;
+                                    </li>
+
+                                    <li>
+                                        It's possible to find functions by analyzing application behavior;
+                                    </li>
+
+                                    <li>
+                                        Pattern Scanning allows you to locate functions even without symbols;
+                                    </li>
+
+                                    <li>
+                                        Wildcards make signatures more resilient to binary updates.
+                                    </li>
+                                </ul>
+                            </div>
+                        </section>
+                </div>
+
+                <footer class="post-footer">
+                    <div class="post-tags">
+                        <span class="tag">
+                            <i class="fas fa-tag"></i>
+                            Function Hooking
+                        </span>
+                        <span class="tag">
+                            <i class="fas fa-tag"></i>
+                            Reverse Engineering
+                        </span>
+                        <span class="tag">
+                            <i class="fas fa-tag"></i>
+                            Detour Hooking
+                        </span>
+                    </div>
+                </footer>
+            </article>
+        </div>
+    </div>
+
+    <div id="footer" class="footer">
+        <footer>
+            <div class="footer-follow">
+                <p data-i18n="footer.text">&copy; 2026 lusca0x01 Blog. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="../../assets/js/script.js"></script>
+    <script src="../../assets/js/post.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            updateTranslations();
+        });
+    </script>
+</body>
+
+</html>

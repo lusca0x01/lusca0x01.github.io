@@ -52,7 +52,7 @@ const posts = {
             date: '20 de maio de 2026',
             readtime: '12',
             excerpt: 'Function Hooking é uma técnica poderosa para interceptar, monitorar e redirecionar chamadas de funções em tempo de execução. Conheça Detour Hooking, Pattern Scanning e muito mais.',
-            url: 'posts/how-to-hook-functions.html'
+            url: 'posts/how-to-hook-functions/how-to-hook-functions-pt-BR.html'
         },
     ],
     'en': [
@@ -62,7 +62,7 @@ const posts = {
             date: 'May 20, 2026',
             readtime: '12',
             excerpt: 'Function Hooking is a powerful technique to intercept, monitor, and redirect function calls at runtime. Learn about Detour Hooking, Pattern Scanning, and more.',
-            url: 'posts/how-to-hook-functions.html'
+            url: 'posts/how-to-hook-functions/how-to-hook-functions-en.html'
         },
     ]
 };
