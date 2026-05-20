@@ -22,6 +22,8 @@ const translations = {
         'about.back': 'Voltar ao Início',
         'page.notfound': 'Página Não Encontrada',
         'page.notfound.desc': 'Desculpe, a página que você está procurando não existe ou foi movida.',
+        'pagination.previous': 'Anterior',
+        'pagination.next': 'Próximo',
     },
     'en': {
         'nav.posts': 'Posts',
@@ -45,6 +47,8 @@ const translations = {
         'about.back': 'Back to Home',
         'page.notfound': 'Page Not Found',
         'page.notfound.desc': 'Sorry, the page you are looking for does not exist or has been moved.',
+        'pagination.previous': 'Previous',
+        'pagination.next': 'Next',
     }
 };
 
@@ -172,14 +176,16 @@ function renderPagination(totalPages) {
 
     const ul = document.createElement('ul');
 
+    const prevText = translations[currentLanguage]['pagination.previous'];
+    const nextText = translations[currentLanguage]['pagination.next'];
 
     if (currentPage > 1) {
         const li = document.createElement('li');
-        li.innerHTML = `<a href="#" onclick="goToPage(${currentPage - 1})">← Previous</a>`;
+        li.innerHTML = `<a href="#" onclick="goToPage(${currentPage - 1})">← ${prevText}</a>`;
         ul.appendChild(li);
     } else {
         const li = document.createElement('li');
-        li.innerHTML = `<span class="disabled">← Previous</span>`;
+        li.innerHTML = `<span class="disabled">← ${prevText}</span>`;
         ul.appendChild(li);
     }
 
@@ -197,11 +203,11 @@ function renderPagination(totalPages) {
 
     if (currentPage < totalPages) {
         const li = document.createElement('li');
-        li.innerHTML = `<a href="#" onclick="goToPage(${currentPage + 1})">Next →</a>`;
+        li.innerHTML = `<a href="#" onclick="goToPage(${currentPage + 1})">${nextText} →</a>`;
         ul.appendChild(li);
     } else {
         const li = document.createElement('li');
-        li.innerHTML = `<span class="disabled">Next →</span>`;
+        li.innerHTML = `<span class="disabled">${nextText} →</span>`;
         ul.appendChild(li);
     }
 
